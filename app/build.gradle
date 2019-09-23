@@ -29,7 +29,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${rootProject.appcompat}"
     implementation "androidx.core:core-ktx:${rootProject.corektx}"
 
-    // Material
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
 
     // TESTS

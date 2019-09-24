@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         send_button.setOnClickListener {
             val inputText = userinput_edittext.text?.toString()
             viewModel.sendButtonClicked(inputText)
+            userinput_edittext.setText("")
         }
     }
 

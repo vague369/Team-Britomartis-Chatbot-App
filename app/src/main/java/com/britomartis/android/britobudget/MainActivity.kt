@@ -1,38 +1,43 @@
 package com.britomartis.android.britobudget
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.britomartis.android.britobudget.ui.ChatAdapter
+import com.britomartis.android.britobudget.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    val viewModel by viewModels<MainActivityViewModel>()
+
+    lateinit var chatAdapter: ChatAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        chatAdapter = ChatAdapter(this, viewModel.messageLiveList.value!!)
+        chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        chat_recyclerview.adapter = chatAdapter
+
+        viewModel.messageLiveList.observe(this, Observer {
+            chatAdapter.dataset = it
+            chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
+            chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
+        })
+
+        send_button.setOnClickListener {
+            val inputText = userinput_edittext.text?.toString()
+            viewModel.sendButtonClicked(inputText)
+            userinput_edittext.setText("")
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    companion object {
+        val TAG = "MainActivity"
     }
 }

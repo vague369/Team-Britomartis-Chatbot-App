@@ -55,7 +55,7 @@
                 android:focusable="true"
                 android:layout_margin="4dp"
                 android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/sent1" />
+                app:srcCompat="@drawable/sent" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

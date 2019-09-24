@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "CHANGE OBSERVED")
             chatAdapter.dataset = it.toList()
             chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
+            chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
         })
 
         send_button.setOnClickListener {

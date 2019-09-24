@@ -5,10 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.britomartis.android.britobudget.data.Message
+import com.britomartis.android.britobudget.data.MessageRepository
 import com.britomartis.android.britobudget.data.MessageType
 import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel(messageRepository: MessageRepository) : ViewModel() {
     // Keep a list of messages
     private val messageList = mutableListOf<Message>()
     // Also keep an observable copy

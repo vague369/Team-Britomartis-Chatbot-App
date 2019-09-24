@@ -1,4 +1,4 @@
-package com.britomartis.android.britobudget.utils
+package com.britomartis.android.britobudget.data
 
 enum class MessageType {
     BOT_MESSAGE,

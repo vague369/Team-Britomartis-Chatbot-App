@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.britomartis.android.britobudget.R
-import com.britomartis.android.britobudget.models.Message
-import com.britomartis.android.britobudget.utils.MessageType
+import com.britomartis.android.britobudget.data.Message
+import com.britomartis.android.britobudget.data.MessageType
+import com.britomartis.android.britobudget.utils.convertTimeLongToString
 
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
@@ -37,7 +38,7 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = dataset[position]
         holder.messageContent.text = message.messageContent
-        holder.messageTime.text = message.messageTime
+        holder.messageTime.text = convertTimeLongToString(message.messageTime)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

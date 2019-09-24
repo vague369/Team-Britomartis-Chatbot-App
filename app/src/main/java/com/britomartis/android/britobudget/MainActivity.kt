@@ -20,13 +20,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        chatAdapter = ChatAdapter(this, viewModel.messageLiveList.value!!.toList())
-
+        chatAdapter = ChatAdapter(this, viewModel.messageLiveList.value!!)
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
 
         viewModel.messageLiveList.observe(this, Observer {
-            chatAdapter.dataset = it.toList()
+            chatAdapter.dataset = it
             chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
         })

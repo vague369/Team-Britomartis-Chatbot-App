@@ -21,11 +21,10 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun sendButtonClicked(inputText: String?) {
-        inputText?.apply { trim() }
         if (inputText == null) return
-        if (TextUtils.isEmpty(inputText)) return
+        if (TextUtils.isEmpty(inputText.trim())) return
 
-        val userMessage = Message(MessageType.USER_MESSAGE, getCurrentTimeAsString(), inputText)
+        val userMessage = Message(MessageType.USER_MESSAGE, getCurrentTimeAsString(), inputText.trim())
         messageList.add(userMessage)
 
         _messageLiveList.value = messageList

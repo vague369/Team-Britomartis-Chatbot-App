@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#F8F8F8"
         tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -19,7 +19,6 @@
         android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="25dp"
-        app:cardElevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -45,8 +44,8 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_weight="0.5"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -62,5 +61,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/layout_recyclerviewitem_bot" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

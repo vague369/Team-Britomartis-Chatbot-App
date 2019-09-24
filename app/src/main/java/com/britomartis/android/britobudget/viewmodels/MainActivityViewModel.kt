@@ -10,7 +10,7 @@ import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(val messageRepository: MessageRepository) : ViewModel() {
+class MainActivityViewModel(private val messageRepository: MessageRepository) : ViewModel() {
 
     val messageLiveList: LiveData<List<Message>>
         get() = messageRepository.getMessages()

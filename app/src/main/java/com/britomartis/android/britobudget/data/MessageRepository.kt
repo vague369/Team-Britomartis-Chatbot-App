@@ -3,7 +3,8 @@ package com.britomartis.android.britobudget.data
 class MessageRepository private constructor(private val messageDao: MessageDao) {
 
     fun getMessages() = messageDao.getMessages()
-    fun insertMessage(message: Message) {
+
+    suspend fun insertMessage(message: Message) {
         messageDao.insertMessage(message)
     }
 

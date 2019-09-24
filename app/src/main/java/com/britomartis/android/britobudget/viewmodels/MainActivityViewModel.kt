@@ -1,6 +1,7 @@
 package com.britomartis.android.britobudget.viewmodels
 
 import android.text.TextUtils
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,11 +11,14 @@ import com.britomartis.android.britobudget.utils.getCurrentTimeAsString
 
 class MainActivityViewModel : ViewModel() {
     // Keep a list of messages
-    lateinit var _messageList: MutableLiveData<MutableList<Message>>
-    val messageList: LiveData<MutableList<Message>> = _messageList
+    private val messageList = mutableListOf<Message>()
+
+    private val _messageLiveList = MutableLiveData<List<Message>>()
+    val messageLiveList: LiveData<List<Message>>
+        get() = _messageLiveList
 
     init {
-        _messageList.value = mutableListOf()
+        _messageLiveList.value = listOf<Message>()
     }
 
     fun sendButtonClicked(inputText: String?) {
@@ -23,7 +27,14 @@ class MainActivityViewModel : ViewModel() {
 
         // Build a new message
         val userMessage = Message(MessageType.USER_MESSAGE, getCurrentTimeAsString(), inputText)
-        _messageList.value?.add(userMessage)
+        messageList.add(userMessage)
+
+        _messageLiveList.value = messageList
+
+        Log.d(TAG, messageList.size.toString())
     }
 
+    companion object {
+        val TAG = "MainActivity"
+    }
 }

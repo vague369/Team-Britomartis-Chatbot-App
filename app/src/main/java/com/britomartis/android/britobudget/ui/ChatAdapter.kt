@@ -10,7 +10,7 @@ import com.britomartis.android.britobudget.R
 import com.britomartis.android.britobudget.models.Message
 import com.britomartis.android.britobudget.utils.MessageType
 
-class ChatAdapter(val context: Context, val dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = when (viewType) {

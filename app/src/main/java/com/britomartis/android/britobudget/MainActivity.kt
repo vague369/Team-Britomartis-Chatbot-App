@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        chatAdapter = ChatAdapter(this, viewModel.messageLiveList.value!!)
+        chatAdapter = ChatAdapter(this, listOf())
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
 

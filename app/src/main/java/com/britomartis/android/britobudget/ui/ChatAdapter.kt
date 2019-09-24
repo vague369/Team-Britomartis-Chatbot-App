@@ -8,17 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.britomartis.android.britobudget.R
 import com.britomartis.android.britobudget.data.Message
-import com.britomartis.android.britobudget.data.MessageType
+import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
+import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.convertTimeLongToString
 
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = when (viewType) {
-            MessageType.USER_MESSAGE.ordinal -> {
+            MESSAGE_TYPE_USER.hashCode() -> {
                 LayoutInflater.from(context).inflate(R.layout.layout_recyclerviewitem_user, parent, false)
             }
-            MessageType.BOT_MESSAGE.ordinal -> {
+            MESSAGE_TYPE_BOT.hashCode() -> {
                 LayoutInflater.from(context).inflate(R.layout.layout_recyclerviewitem_bot, parent, false)
             }
             else -> throw IllegalStateException("Chat message ViewType not known")
@@ -28,7 +29,7 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
     }
 
     override fun getItemViewType(position: Int): Int {
-        return dataset[position].messageType.ordinal
+        return dataset[position].messageType.hashCode()
     }
 
     override fun getItemCount(): Int {

@@ -14,3 +14,7 @@ fun getCurrentTimeAsLong(): Long {
 fun convertTimeLongToString(time: Long): String {
     return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(time))
 }
+
+fun convertTimeLongToDateString(time: Long): String {
+    return SimpleDateFormat("MMMM d, YYYY", Locale.getDefault()).format(time)
+}

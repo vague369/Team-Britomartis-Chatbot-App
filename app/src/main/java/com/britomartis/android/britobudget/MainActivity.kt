@@ -1,6 +1,7 @@
 package com.britomartis.android.britobudget
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.britomartis.android.britobudget.ui.ChatAdapter
 import com.britomartis.android.britobudget.utils.Injector
+import com.britomartis.android.britobudget.utils.convertTimeLongToDateString
 import com.britomartis.android.britobudget.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,6 +40,17 @@ class MainActivity : AppCompatActivity() {
             viewModel.sendButtonClicked(inputText)
             userinput_edittext.setText("")
         }
+
+        chat_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d(TAG, "Scrolling")
+                val p =
+                    (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                val message = chatAdapter.dataset[p]
+                history_date.text = convertTimeLongToDateString(message.messageTime)
+            }
+        })
     }
 
     companion object {

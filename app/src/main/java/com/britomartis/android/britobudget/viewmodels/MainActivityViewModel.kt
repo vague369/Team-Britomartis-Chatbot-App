@@ -2,32 +2,31 @@ package com.britomartis.android.britobudget.viewmodels
 
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.britomartis.android.britobudget.models.Message
-import com.britomartis.android.britobudget.utils.MessageType
-import com.britomartis.android.britobudget.utils.getCurrentTimeAsString
+import androidx.lifecycle.viewModelScope
+import com.britomartis.android.britobudget.data.Message
+import com.britomartis.android.britobudget.data.MessageRepository
+import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
+import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
+import kotlinx.coroutines.launch
 
-class MainActivityViewModel : ViewModel() {
-    // Keep a list of messages
-    private val messageList = mutableListOf<Message>()
-    // Also keep an observable copy
-    private val _messageLiveList = MutableLiveData<List<Message>>()
+class MainActivityViewModel(private val messageRepository: MessageRepository) : ViewModel() {
+
     val messageLiveList: LiveData<List<Message>>
-        get() = _messageLiveList
-
-    init {
-        _messageLiveList.value = listOf()
-    }
+        get() = messageRepository.getMessages()
 
     fun sendButtonClicked(inputText: String?) {
         if (inputText == null) return
         if (TextUtils.isEmpty(inputText.trim())) return
 
-        val userMessage = Message(MessageType.USER_MESSAGE, getCurrentTimeAsString(), inputText.trim())
-        messageList.add(userMessage)
-
-        _messageLiveList.value = messageList
+        val userMessage = Message(
+            MESSAGE_TYPE_USER,
+            getCurrentTimeAsLong(),
+            inputText.trim()
+        )
+        viewModelScope.launch {
+            messageRepository.insertMessage(userMessage)
+        }
     }
 
     companion object {

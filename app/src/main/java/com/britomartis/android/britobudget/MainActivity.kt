@@ -7,12 +7,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.britomartis.android.britobudget.ui.ChatAdapter
+import com.britomartis.android.britobudget.utils.Injector
 import com.britomartis.android.britobudget.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel by viewModels<MainActivityViewModel>()
+    val viewModel: MainActivityViewModel by viewModels {
+        Injector.provideMainActivityViewModelFactory(applicationContext)
+    }
 
     lateinit var chatAdapter: ChatAdapter
 
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        chatAdapter = ChatAdapter(this, viewModel.messageLiveList.value!!)
+        chatAdapter = ChatAdapter(this, listOf())
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
 

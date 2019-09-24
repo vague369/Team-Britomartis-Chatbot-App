@@ -41,6 +41,12 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:${rootProject.corektx}"
     kapt "androidx.lifecycle:lifecycle-compiler:${rootProject.lifecycle}"
 
+    //Room
+    implementation "androidx.room:room-runtime:${rootProject.room}"
+    kapt "androidx.room:room-compiler:${rootProject.room}"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:${rootProject.room}"
+
     // TESTS
     testImplementation "com.google.truth:truth:${rootProject.truth}"
     testImplementation "junit:junit:${rootProject.junit}"

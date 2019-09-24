@@ -38,6 +38,7 @@ dependencies {
 
     //Lifecycle & ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycle}"
+    implementation "androidx.fragment:fragment-ktx:${rootProject.corektx}"
     kapt "androidx.lifecycle:lifecycle-compiler:${rootProject.lifecycle}"
 
     // TESTS

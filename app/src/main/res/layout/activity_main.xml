@@ -41,7 +41,7 @@
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:hint="@string/type_here"
-                android:inputType="textShortMessage|textLongMessage|textMultiLine"
+                android:inputType="textShortMessage|textLongMessage|textMultiLine|textCapSentences"
                 android:maxHeight="120dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 

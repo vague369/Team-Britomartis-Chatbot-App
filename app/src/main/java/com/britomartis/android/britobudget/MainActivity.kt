@@ -1,7 +1,6 @@
 package com.britomartis.android.britobudget
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         chat_recyclerview.adapter = chatAdapter
 
         viewModel.messageLiveList.observe(this, Observer {
-            Log.d(TAG, "CHANGE OBSERVED")
             chatAdapter.dataset = it.toList()
             chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
@@ -35,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         send_button.setOnClickListener {
             val inputText = userinput_edittext.text?.toString()
-            Log.d(TAG, inputText)
             viewModel.sendButtonClicked(inputText)
         }
     }

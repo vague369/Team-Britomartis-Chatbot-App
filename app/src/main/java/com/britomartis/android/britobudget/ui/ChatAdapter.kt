@@ -37,9 +37,11 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = dataset[position]
         holder.messageContent.text = message.messageContent
+        holder.messageTime.text = message.messageTime
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val messageContent = view.findViewById<TextView>(R.id.messageContent)
+        val messageTime = view.findViewById<TextView>(R.id.messageTime)
     }
 }

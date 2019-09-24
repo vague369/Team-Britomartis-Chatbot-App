@@ -18,7 +18,7 @@ class MainActivityViewModel : ViewModel() {
         get() = _messageLiveList
 
     init {
-        _messageLiveList.value = listOf<Message>()
+        _messageLiveList.value = listOf()
     }
 
     fun sendButtonClicked(inputText: String?) {
@@ -35,6 +35,6 @@ class MainActivityViewModel : ViewModel() {
     }
 
     companion object {
-        val TAG = "MainActivity"
+        const val TAG = "MainActivity"
     }
 }

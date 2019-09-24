@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/user_item_textbackground"
         android:minHeight="50dp"
+        android:minWidth="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,7 +30,7 @@
             android:padding="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@android:color/white"
-            tools:text="Anytime" />
+            tools:text="Hello" />
 
 
     </LinearLayout>

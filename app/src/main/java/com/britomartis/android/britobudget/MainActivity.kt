@@ -1,7 +1,8 @@
 package com.britomartis.android.britobudget
 
 import android.os.Bundle
-import android.util.Log
+import android.text.format.DateUtils
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -44,11 +45,16 @@ class MainActivity : AppCompatActivity() {
         chat_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                Log.d(TAG, "Scrolling")
+
                 val p =
                     (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 val message = chatAdapter.dataset[p]
-                history_date.text = convertTimeLongToDateString(message.messageTime)
+                if (DateUtils.isToday(message.messageTime)) {
+                    history_date.visibility = View.GONE
+                } else {
+                    history_date.visibility = View.VISIBLE
+                    history_date.text = convertTimeLongToDateString(message.messageTime)
+                }
             }
         })
     }

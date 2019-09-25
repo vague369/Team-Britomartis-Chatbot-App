@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel: MainActivityViewModel by viewModels {
+    private val viewModel: MainActivityViewModel by viewModels {
         Injector.provideMainActivityViewModelFactory(applicationContext)
     }
 
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             userinput_edittext.setText("")
         }
 
+        // Set the date, depending on the first visible item
         chat_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)

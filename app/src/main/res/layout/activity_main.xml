@@ -88,6 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chat_recyclerview"
-        tools:text="Yesterday" />
+        tools:text="SEPTEMBER 23, 2019" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

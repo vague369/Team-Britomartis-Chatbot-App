@@ -43,9 +43,10 @@
             android:gravity="start"
             android:maxWidth="250dp"
             android:padding="8dp"
+            android:layout_centerInParent="true"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@android:color/black"
-            tools:text="Sorry, I don't understand that" />
+            tools:text="@string/no_response_from_bot" />
 
     </RelativeLayout>
 

@@ -36,6 +36,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
 
+    //Lottie
+    implementation "com.airbnb.android:lottie:${rootProject.lottie}"
+
     //Lifecycle & ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycle}"
     implementation "androidx.fragment:fragment-ktx:${rootProject.corektx}"

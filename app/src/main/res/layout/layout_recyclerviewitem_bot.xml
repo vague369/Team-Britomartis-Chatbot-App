@@ -6,19 +6,19 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:padding="8dp"
+    android:padding="1dp"
     android:orientation="horizontal">
 
     <RelativeLayout
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/bot_item_textbackground"
         android:gravity="center"
-        android:minWidth="80dp"
+        android:minWidth="100dp"
         android:minHeight="50dp"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent">
@@ -61,7 +61,7 @@
         android:id="@+id/imageView2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:tint="@color/colorAccent"
+        android:tint="@color/colorAccent1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/chatbot_icon" />

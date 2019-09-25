@@ -47,6 +47,7 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         if (message.messageType == MESSAGE_TYPE_BOT) {
             if (TextUtils.isEmpty(message.messageContent)) {
                 if (isOver5Minutes(message.messageTime)) {
+                    // Could not load the message
                     holder.messageContent.text = context.getString(R.string.no_response_from_bot)
                     holder.lottieProgress.visibility = View.GONE
                     return

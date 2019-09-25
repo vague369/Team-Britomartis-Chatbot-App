@@ -40,9 +40,11 @@
                 android:layout_weight="2"
                 android:background="@android:color/transparent"
                 android:ems="10"
+                android:imeOptions="actionSend|flagNoEnterAction"
                 android:hint="@string/type_here"
-                android:inputType="textShortMessage|textLongMessage|textMultiLine|textCapSentences"
+                android:inputType="textShortMessage|textAutoCorrect|textLongMessage|textMultiLine|textCapSentences"
                 android:maxHeight="120dp"
+                android:maxLength="2000"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <ImageView

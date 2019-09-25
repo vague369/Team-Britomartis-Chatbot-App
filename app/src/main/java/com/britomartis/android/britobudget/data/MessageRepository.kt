@@ -9,7 +9,6 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
     }
 
     companion object {
-
         // For Singleton instantiation
         @Volatile
         private var instance: MessageRepository? = null

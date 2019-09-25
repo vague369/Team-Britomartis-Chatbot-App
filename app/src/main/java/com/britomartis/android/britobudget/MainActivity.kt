@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
 
+        // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
             chatAdapter.dataset = it
             chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)

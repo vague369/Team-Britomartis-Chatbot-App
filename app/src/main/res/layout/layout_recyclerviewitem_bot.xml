@@ -23,10 +23,21 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="lottie_progress_dot.json"
+            app:lottie_loop="true" />
+
         <TextView
             android:id="@+id/messageContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="start"
@@ -34,15 +45,7 @@
             android:padding="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@android:color/black"
-            tools:text="" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="lottie_progress_dot.json"
-            app:lottie_loop="true" />
+            tools:text="Sorry, I don't understand that" />
 
     </RelativeLayout>
 

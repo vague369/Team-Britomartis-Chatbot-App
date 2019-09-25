@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.britomartis.android.britobudget.R
 import com.britomartis.android.britobudget.data.Message
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
@@ -45,6 +46,9 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         if (message.messageType == MESSAGE_TYPE_BOT) {
             if (TextUtils.isEmpty(message.messageContent)) {
                 // Start Lottie Animation
+                if (holder.lottieProgress != null) {
+                    holder.lottieProgress.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -52,5 +56,6 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val messageContent = view.findViewById<TextView>(R.id.messageContent)
         val messageTime = view.findViewById<TextView>(R.id.messageTime)
+        val lottieProgress = view.findViewById<LottieAnimationView>(R.id.lottie_progress)
     }
 }

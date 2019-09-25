@@ -1,6 +1,7 @@
 package com.britomartis.android.britobudget.ui
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,12 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         val message = dataset[position]
         holder.messageContent.text = message.messageContent
         holder.messageTime.text = convertTimeLongToString(message.messageTime)
+
+        if (message.messageType == MESSAGE_TYPE_BOT) {
+            if (TextUtils.isEmpty(message.messageContent)) {
+                // Start Lottie Animation
+            }
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

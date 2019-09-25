@@ -29,3 +29,13 @@ fun convertTimeLongToDateString(time: Long): String {
     // Else just return the formatted date
     return SimpleDateFormat("MMMM d, YYYY", Locale.getDefault()).format(time)
 }
+
+fun isOver5Minutes(time: Long): Boolean {
+    val c1 = Calendar.getInstance()
+    c1.add(Calendar.MINUTE, -5)
+    val c2 = Calendar.getInstance()
+    c2.timeInMillis = time
+
+    if (c2.before(c1)) return true
+    return false
+}

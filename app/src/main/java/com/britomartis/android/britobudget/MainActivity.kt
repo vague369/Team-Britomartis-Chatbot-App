@@ -48,9 +48,12 @@ class MainActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val p =
-                    (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                if (p == -1) return
+                var p =
+                    (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                if (p == -1)
+                    p = (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                //TODO: Ensure p doesn't become -1
+
                 val message = chatAdapter.dataset[p]
                 if (DateUtils.isToday(message.messageTime)) {
                     history_date.visibility = View.GONE

@@ -1,5 +1,6 @@
 package com.britomartis.android.britobudget.data
 
+import android.util.Log
 import com.google.cloud.dialogflow.v2.*
 
 class MessageRepository private constructor(private val messageDao: MessageDao) {
@@ -26,6 +27,7 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
 
         } catch (e: Exception) {
             e.printStackTrace()
+            Log.d(TAG, e.toString())
         }
 
         return null
@@ -42,6 +44,8 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
     }
 
     companion object {
+        const val TAG = "MainActivityViewModel"
+
         // For Singleton instantiation
         @Volatile
         private var instance: MessageRepository? = null

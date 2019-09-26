@@ -2,6 +2,7 @@ package com.britomartis.android.britobudget.viewmodels
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -68,13 +69,13 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             messageRepository.insertMessage(botResponse)
 
             if (hasConnectivity(context)) {
-                val reply = messageRepository.getChatbotReply(inputText.trim())
-                botResponse.messageContent = reply
-                messageRepository.updateMessage(botResponse)
+                Log.d(TAG, "Has connectivity")
+
             } else {
+                Log.d(TAG, "No connectivity")
                 // If the network is down, reply with an error message
                 botResponse.messageContent = context.getString(R.string.no_network)
-                messageRepository.updateMessage(botResponse)
+                messageRepository.updateMessageContent(botResponse.messageTime, botResponse.messageContent)
             }
         }
     }

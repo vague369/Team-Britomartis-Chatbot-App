@@ -23,7 +23,7 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
         messageDao.insertMessage(message)
     }
 
-    suspend fun updateMessageContent(messageId: Int, messageContent: String) {
+    suspend fun updateMessageContent(messageId: String, messageContent: String) {
         messageDao.updateMessageContent(messageId, messageContent)
     }
 

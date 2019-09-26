@@ -14,5 +14,5 @@ interface MessageDao {
     fun getMessages(): LiveData<List<Message>>
 
     @Query("UPDATE messages SET messageContent = :messageContent WHERE messageId =:messageId")
-    suspend fun updateMessageContent(messageId: Int, messageContent: String)
+    suspend fun updateMessageContent(messageId: String, messageContent: String)
 }

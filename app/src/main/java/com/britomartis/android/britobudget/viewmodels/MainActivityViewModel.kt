@@ -40,7 +40,7 @@ class MainActivityViewModel(context: Context, private val messageRepository: Mes
             val sessionsClient = SessionsClient.create(sessionSettings)
             val session = SessionName.of(projectIdStr, sessionUUID)
 
-            messageRepository.initChatBot(session, sessionsClient)
+            messageRepository.initChatbot(session, sessionsClient)
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -61,6 +61,7 @@ class MainActivityViewModel(context: Context, private val messageRepository: Mes
             getCurrentTimeAsLong(),
             ""
         )
+
         viewModelScope.launch {
             messageRepository.insertMessage(userMessage)
             messageRepository.insertMessage(botResponse)

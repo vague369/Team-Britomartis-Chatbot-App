@@ -8,9 +8,13 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
     lateinit var sessionsClient: SessionsClient
     lateinit var session: SessionName
 
-    fun initChatBot(session: SessionName, sessionsClient: SessionsClient) {
+    fun initChatbot(session: SessionName, sessionsClient: SessionsClient) {
         this.session = session
         this.sessionsClient = sessionsClient
+    }
+
+    suspend fun getChatbotReply(query: String): String {
+
     }
 
     fun getMessages() = messageDao.getMessages()

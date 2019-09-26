@@ -70,6 +70,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
         viewModelScope.launch {
             // Dispatchers.Main
             messageRepository.insertMessage(userMessage)
+            messageRepository.insertMessage(botResponse)
 
             // Get the chatbot's reply
             withContext(Dispatchers.IO) {
@@ -86,7 +87,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 botResponse.messageContent = reply ?: context.getString(R.string.no_network)
                 botResponse.messageTime = getCurrentTimeAsLong()
 
-                messageRepository.insertMessage(botResponse)
+                messageRepository.updateMessageContent(botResponse.messageId, botResponse.messageContent)
             }
         }
     }

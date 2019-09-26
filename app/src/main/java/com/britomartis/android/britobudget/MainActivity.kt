@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.messageLiveList.observe(this, Observer {
             Log.d(TAG, "Changes Observed")
             chatAdapter.dataset = it
+            chatAdapter.notifyDataSetChanged()
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
             Log.d(TAG, "Observation done")
         })

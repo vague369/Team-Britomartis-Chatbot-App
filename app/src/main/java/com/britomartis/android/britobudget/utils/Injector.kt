@@ -15,6 +15,6 @@ object Injector {
 
     fun provideMainActivityViewModelFactory(context: Context): MainActivityViewModelFactory {
         val repository = getMessageRepository(context)
-        return MainActivityViewModelFactory(repository)
+        return MainActivityViewModelFactory(context, repository)
     }
 }

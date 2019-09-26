@@ -1,5 +1,6 @@
 package com.britomartis.android.britobudget.viewmodels
 
+import android.content.Context
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,7 @@ import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val messageRepository: MessageRepository) : ViewModel() {
+class MainActivityViewModel(val context: Context, private val messageRepository: MessageRepository) : ViewModel() {
 
     val messageLiveList: LiveData<List<Message>>
         get() = messageRepository.getMessages()

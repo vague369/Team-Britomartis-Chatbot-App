@@ -2,4 +2,6 @@
     <string name="app_name">BritoBudget</string>
     <string name="action_settings">Settings</string>
     <string name="type_here">Type a message here</string>
+    <string name="britomartis">Britomartis</string>
+    <string name="chatbot">Chatbot</string>
 </resources>

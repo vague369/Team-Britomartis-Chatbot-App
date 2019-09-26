@@ -32,7 +32,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlin}"
     implementation "androidx.appcompat:appcompat:${rootProject.appcompat}"
     implementation "androidx.core:core-ktx:${rootProject.corektx}"
-
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
 

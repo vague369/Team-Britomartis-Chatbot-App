@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.messageLiveList.observe(this, Observer {
             Log.d(TAG, "Changes Observed")
             chatAdapter.dataset = it
-            chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
+            Log.d(TAG, "Observation done")
         })
 
         send_button.setOnClickListener {
@@ -68,6 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = "MainActivity"
+        val TAG = "MainActivityViewModel"
     }
 }

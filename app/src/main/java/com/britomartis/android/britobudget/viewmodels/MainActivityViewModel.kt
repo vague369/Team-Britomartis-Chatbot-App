@@ -9,7 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.britomartis.android.britobudget.R
 import com.britomartis.android.britobudget.data.Message
 import com.britomartis.android.britobudget.data.MessageRepository
-import com.britomartis.android.britobudget.utils.*
+import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
+import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
+import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
+import com.britomartis.android.britobudget.utils.getRandomUUID
 import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.auth.oauth2.ServiceAccountCredentials
@@ -62,20 +65,15 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
 
         viewModelScope.launch {
             messageRepository.insertMessage(userMessage)
+            Log.d(TAG, "Inserting Message")
             messageRepository.insertMessage(botResponse)
 
-            if (hasConnectivity(context)) {
-                Log.d(TAG, "Has connectivity")
-                /*val reply = messageRepository.getChatbotReply(inputText.trim())
-                botResponse.messageContent = reply
-                messageRepository.updateMessage(botResponse)*/
-            } else {
-                Log.d(TAG, "No connectivity")
-                // If the network is down, reply with an error message
-                botResponse.messageContent = context.getString(R.string.no_network)
-                messageRepository.updateMessageContent(botResponse.messageId, botResponse.messageContent)
-                Log.d(TAG, botResponse.messageContent)
+            // Get the chatbot's reply
+            val reply = messageRepository.getChatbotReply(inputText.trim())
+            reply?.let {
+                messageRepository.updateMessageContent(botResponse.messageId, it)
             }
+                ?: Log.d(TAG, "No response from bot")
         }
     }
 

@@ -1,7 +1,6 @@
 package com.britomartis.android.britobudget.data
 
-import com.google.cloud.dialogflow.v2.SessionName
-import com.google.cloud.dialogflow.v2.SessionsClient
+import com.google.cloud.dialogflow.v2.*
 
 class MessageRepository private constructor(private val messageDao: MessageDao) {
 
@@ -13,8 +12,23 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
         this.sessionsClient = sessionsClient
     }
 
-    suspend fun getChatbotReply(query: String): String {
-        TODO()
+    suspend fun getChatbotReply(query: String): String? {
+        try {
+            val textInput = TextInput.newBuilder().setText(query).setLanguageCode("en-US").build()
+            val queryInput = QueryInput.newBuilder().setText(textInput).build()
+            val detectIntentRequest = DetectIntentRequest.newBuilder()
+                .setSession(session.toString())
+                .setQueryInput(queryInput)
+                .build()
+
+            val response = sessionsClient.detectIntent(detectIntentRequest)
+            return response.queryResult.fulfillmentText
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return null
     }
 
     fun getMessages() = messageDao.getMessages()

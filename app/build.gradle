@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.britomartis.android.britobudget"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -35,6 +35,9 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:${rootProject.lottie}"
 
     //Lifecycle & ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycle}"

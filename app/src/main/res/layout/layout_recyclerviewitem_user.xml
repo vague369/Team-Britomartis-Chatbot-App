@@ -6,17 +6,18 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:padding="8dp"
+    android:padding="1dp"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/user_item_textbackground"
-        android:minHeight="50dp"
         android:gravity="center"
         android:minWidth="60dp"
+        android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

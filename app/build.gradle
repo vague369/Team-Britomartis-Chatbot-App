@@ -36,6 +36,14 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
 
+    //Dialogflow SDK
+    implementation "ai.api:sdk:2.0.7@aar"
+    implementation "ai.api:libai:1.6.12"
+        //JavaV2
+    implementation "com.google.cloud:google-cloud-dialogflow:0.67.0-alpha"
+
+    implementation "io.grpc:grpc-okhttp:1.15.1"
+
     //Lottie
     implementation "com.airbnb.android:lottie:${rootProject.lottie}"
 

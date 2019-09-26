@@ -13,6 +13,6 @@ interface MessageDao {
     @Query("SELECT * FROM messages ORDER BY messageTime ASC")
     fun getMessages(): LiveData<List<Message>>
 
-    @Query("UPDATE messages SET messageContent = :messageContent WHERE messageTime =:messageTime")
-    suspend fun updateMessageContent(messageTime: Long, messageContent: String)
+    @Query("UPDATE messages SET messageContent = :messageContent WHERE messageId =:messageId")
+    suspend fun updateMessageContent(messageId: Int, messageContent: String)
 }

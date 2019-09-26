@@ -11,6 +11,10 @@ fun hasConnectivity(context: Context): Boolean {
     return activeNetwork?.isConnectedOrConnecting == true
 }
 
+fun getRandomUUID(): String {
+    return UUID.randomUUID().toString()
+}
+
 fun getCurrentTimeAsString(): String {
     return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date())
 }

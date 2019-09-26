@@ -68,6 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = "MainActivityViewModel"
+        val TAG = "MainActivity"
     }
 }

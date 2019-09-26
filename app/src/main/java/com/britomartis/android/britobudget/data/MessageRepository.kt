@@ -23,8 +23,8 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
         messageDao.insertMessage(message)
     }
 
-    suspend fun updateMessageContent(messageTime: Long, messageContent: String) {
-        messageDao.updateMessageContent(messageTime, messageContent)
+    suspend fun updateMessageContent(messageId: Int, messageContent: String) {
+        messageDao.updateMessageContent(messageId, messageContent)
     }
 
     companion object {

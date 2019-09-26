@@ -20,7 +20,7 @@ import com.google.cloud.dialogflow.v2.SessionsSettings
 import kotlinx.coroutines.launch
 import java.util.*
 
-class MainActivityViewModel(val context: Context, private val messageRepository: MessageRepository) : ViewModel() {
+class MainActivityViewModel(context: Context, private val messageRepository: MessageRepository) : ViewModel() {
 
     val messageLiveList: LiveData<List<Message>>
         get() = messageRepository.getMessages()
@@ -41,6 +41,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             val session = SessionName.of(projectIdStr, sessionUUID)
 
             messageRepository.initChatBot(session, sessionsClient)
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -9,17 +9,16 @@ import androidx.lifecycle.viewModelScope
 import com.britomartis.android.britobudget.R
 import com.britomartis.android.britobudget.data.Message
 import com.britomartis.android.britobudget.data.MessageRepository
-import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
-import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
-import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
-import com.britomartis.android.britobudget.utils.getRandomUUID
+import com.britomartis.android.britobudget.utils.*
 import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.auth.oauth2.ServiceAccountCredentials
 import com.google.cloud.dialogflow.v2.SessionName
 import com.google.cloud.dialogflow.v2.SessionsClient
 import com.google.cloud.dialogflow.v2.SessionsSettings
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivityViewModel(val context: Context, private val messageRepository: MessageRepository) : ViewModel() {
 
@@ -50,30 +49,43 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
 
     fun sendButtonClicked(inputText: String?) {
         if (inputText == null) return
-        if (TextUtils.isEmpty(inputText.trim())) return
+        val trimmedText = inputText.trim()
+        if (TextUtils.isEmpty(trimmedText)) return
 
+        // Build the user's message
         val userMessage = Message(
             MESSAGE_TYPE_USER,
             getCurrentTimeAsLong(),
-            inputText.trim()
+            trimmedText
         )
+
+        // Build an empty bot message
         val botResponse = Message(
             MESSAGE_TYPE_BOT,
             getCurrentTimeAsLong(),
             ""
         )
 
+        // Coroutines bridge
         viewModelScope.launch {
+            // Dispatchers.Main
             messageRepository.insertMessage(userMessage)
-            Log.d(TAG, "Inserting Message")
-            messageRepository.insertMessage(botResponse)
 
             // Get the chatbot's reply
-            val reply = messageRepository.getChatbotReply(inputText.trim())
-            reply?.let {
-                messageRepository.updateMessageContent(botResponse.messageId, it)
+            withContext(Dispatchers.IO) {
+                // Dispatchers.IO
+                val reply: String?
+                if (hasConnectivity(context)) {
+                    reply = messageRepository.getChatbotReply(trimmedText)
+                } else {
+                    reply = null
+                }
+
+                Log.d(TAG, reply.toString())
+
+                botResponse.messageContent = reply ?: context.getString(R.string.no_network)
+                messageRepository.insertMessage(botResponse)
             }
-                ?: Log.d(TAG, "No response from bot")
         }
     }
 

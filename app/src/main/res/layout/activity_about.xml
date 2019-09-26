@@ -61,7 +61,7 @@
             android:id="@+id/btn_about"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="About"
+            android:text="@string/about"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:background="@drawable/white_background"

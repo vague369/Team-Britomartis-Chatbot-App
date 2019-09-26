@@ -14,13 +14,17 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
     }
 
     suspend fun getChatbotReply(query: String): String {
-
+        TODO()
     }
 
     fun getMessages() = messageDao.getMessages()
 
     suspend fun insertMessage(message: Message) {
         messageDao.insertMessage(message)
+    }
+
+    suspend fun updateMessage(message: Message) {
+        messageDao.updateMessage(message)
     }
 
     companion object {

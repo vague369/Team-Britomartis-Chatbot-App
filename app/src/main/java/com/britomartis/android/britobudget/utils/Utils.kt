@@ -1,7 +1,15 @@
 package com.britomartis.android.britobudget.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
 import java.text.SimpleDateFormat
 import java.util.*
+
+fun hasConnectivity(context: Context): Boolean {
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetwork = cm.activeNetworkInfo
+    return activeNetwork?.isConnectedOrConnecting == true
+}
 
 fun getCurrentTimeAsString(): String {
     return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date())

@@ -11,6 +11,7 @@ import com.britomartis.android.britobudget.data.MessageRepository
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.getCurrentTimeAsLong
+import com.britomartis.android.britobudget.utils.hasConnectivity
 import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.auth.oauth2.ServiceAccountCredentials
@@ -20,7 +21,7 @@ import com.google.cloud.dialogflow.v2.SessionsSettings
 import kotlinx.coroutines.launch
 import java.util.*
 
-class MainActivityViewModel(context: Context, private val messageRepository: MessageRepository) : ViewModel() {
+class MainActivityViewModel(val context: Context, private val messageRepository: MessageRepository) : ViewModel() {
 
     val messageLiveList: LiveData<List<Message>>
         get() = messageRepository.getMessages()
@@ -65,6 +66,16 @@ class MainActivityViewModel(context: Context, private val messageRepository: Mes
         viewModelScope.launch {
             messageRepository.insertMessage(userMessage)
             messageRepository.insertMessage(botResponse)
+
+            if (hasConnectivity(context)) {
+                val reply = messageRepository.getChatbotReply(inputText.trim())
+                botResponse.messageContent = reply
+                messageRepository.updateMessage(botResponse)
+            } else {
+                // If the network is down, reply with an error message
+                botResponse.messageContent = context.getString(R.string.no_network)
+                messageRepository.updateMessage(botResponse)
+            }
         }
     }
 

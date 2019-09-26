@@ -7,7 +7,7 @@ import com.britomartis.android.britobudget.utils.getRandomUUID
 @Entity(tableName = "messages")
 data class Message(
     val messageType: String,
-    val messageTime: Long,
+    var messageTime: Long,
     var messageContent: String,
     @PrimaryKey
     val messageId: String = getRandomUUID()

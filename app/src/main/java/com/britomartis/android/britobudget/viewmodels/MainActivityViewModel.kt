@@ -84,6 +84,8 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 Log.d(TAG, reply.toString())
 
                 botResponse.messageContent = reply ?: context.getString(R.string.no_network)
+                botResponse.messageTime = getCurrentTimeAsLong()
+
                 messageRepository.insertMessage(botResponse)
             }
         }

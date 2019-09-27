@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels {
-        Injector.provideMainActivityViewModelFactory(applicationContext)
+        Injector.provideMainActivityViewModelFactory(this)
     }
 
     lateinit var chatAdapter: ChatAdapter

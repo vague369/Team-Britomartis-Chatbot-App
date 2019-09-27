@@ -90,7 +90,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             withContext(Dispatchers.IO) {
                 // Dispatchers.IO
                 val replyPair: Pair<String?, Map<String, Value>?>?
-                val reply: String?
+                var reply: String? = null
                 if (hasConnectivity(context)) {
                     replyPair = messageRepository.getChatbotReply(trimmedText)
                     reply = replyPair?.first
@@ -104,7 +104,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name
-                if (hasConnectivity(context) && !userNameAlreadySaved(context)) {
+                if ((reply != null) && !userNameAlreadySaved(context)) {
                     // There is no username saved insert a username question
                     val userNameQuery = Message(
                         MESSAGE_TYPE_BOT,

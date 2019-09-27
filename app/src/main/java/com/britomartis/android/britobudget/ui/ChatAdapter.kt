@@ -47,15 +47,20 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         if (message.messageType == MESSAGE_TYPE_BOT) {
             if (TextUtils.isEmpty(message.messageContent)) {
                 if (isOver5Minutes(message.messageTime)) {
-                    // Could not load the message
-                    holder.messageContent.text = context.getString(R.string.no_response_from_bot)
+                    // Probably will not get a response EVER
+                    message.messageContent = context.getString(R.string.no_response_from_bot)
+                    holder.messageContent.text = message.messageContent
                     holder.lottieProgress.visibility = View.GONE
-                    return
                 }
-                // Start Lottie Animation
-                if (holder.lottieProgress != null) {
+                // Else start Lottie Animation
+                else if (holder.lottieProgress != null) {
                     holder.lottieProgress.visibility = View.VISIBLE
                 }
+            } else {
+                // We have a reply
+                holder.messageContent.text = message.messageContent
+                holder.lottieProgress.visibility = View.GONE
+                return
             }
         }
     }

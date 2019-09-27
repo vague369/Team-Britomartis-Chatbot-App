@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels {
-        Injector.provideMainActivityViewModelFactory(applicationContext)
+        Injector.provideMainActivityViewModelFactory(this)
     }
 
     lateinit var chatAdapter: ChatAdapter
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
             chatAdapter.dataset = it
-            chatAdapter.notifyItemInserted(chatAdapter.dataset.size - 1)
+            chatAdapter.notifyDataSetChanged()
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
         })
 
@@ -66,6 +66,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = "MainActivity"
+        val TAG = "MainActivityViewModel"
     }
 }

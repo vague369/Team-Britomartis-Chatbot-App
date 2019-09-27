@@ -9,4 +9,5 @@
     <string name="chatbot_action_user_has_no_name">__@NOTICE_USER HAS NO NAME__</string>
     <string name="chatbot_defaultreply_what_is_your_name">Oh bummer! I don\'t seem to have your name. What do I call you?</string>
     <string name="chatbot_defaultreplacement_no_local_username">… Umm?</string>
+    <string name="chatbot_defaultreply_first_hello">Hello</string>
 </resources>

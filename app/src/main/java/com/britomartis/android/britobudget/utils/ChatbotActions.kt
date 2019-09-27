@@ -46,6 +46,8 @@ fun parseBotReply(context: Context, replyPair: Pair<String?, Map<String, Value>?
     payload ?: return replyText
 
     // PARSE THE PAYLOAD
+    // Ensure it has a type
+    if (!payload.keys.contains("type")) return replyText
     when (payload.getValue("type").stringValue) {
         "REPLACE" -> {
             // Asking for replacement

@@ -78,6 +78,8 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 val reply: String?
                 if (hasConnectivity(context)) {
                     reply = messageRepository.getChatbotReply(trimmedText)
+                    // Check if the user has a saved name
+
                 } else {
                     reply = null
                 }

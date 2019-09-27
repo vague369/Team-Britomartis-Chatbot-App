@@ -4,4 +4,5 @@
     <string name="type_here">Type a message here</string>
     <string name="no_response_from_bot">Sorry, I could not understand that</string>
     <string name="no_network">Oops! I can\'t connect to the internet, Please check your connection.</string>
+    <string name="username_pref_key">USERNAME_PREF_KEY</string>
 </resources>

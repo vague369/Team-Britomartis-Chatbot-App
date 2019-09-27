@@ -4,6 +4,11 @@ import android.content.Context
 import com.britomartis.android.britobudget.MainActivity
 import com.britomartis.android.britobudget.R
 
+
+fun parseBotReply(context: Context, reply: String?): String? {
+    return reply
+}
+
 fun userNameAlreadySaved(context: Context): Boolean {
     val sharedPref = (context as MainActivity).getPreferences(Context.MODE_PRIVATE)
     sharedPref?.let { sp ->

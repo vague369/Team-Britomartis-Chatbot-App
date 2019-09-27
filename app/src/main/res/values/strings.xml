@@ -7,5 +7,5 @@
     <string name="username_pref_key">USERNAME_PREF_KEY</string>
 
     <string name="chatbot_action_user_has_no_name">__@NOTICE_USER HAS NO NAME__</string>
-    <string name="chatbot_defaultreply_what_is_your_name">Oh! sorry, I don\'t seem to have your name. What do I call you?</string>
+    <string name="chatbot_defaultreply_what_is_your_name">Oh bummer! I don\'t seem to have your name. What do I call you?</string>
 </resources>

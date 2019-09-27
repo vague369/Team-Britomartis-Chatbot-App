@@ -16,6 +16,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials
 import com.google.cloud.dialogflow.v2.SessionName
 import com.google.cloud.dialogflow.v2.SessionsClient
 import com.google.cloud.dialogflow.v2.SessionsSettings
+import com.google.protobuf.Value
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -75,16 +76,18 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             // Get the chatbot's reply
             withContext(Dispatchers.IO) {
                 // Dispatchers.IO
+                val replyPair: Pair<String?, Map<String, Value>?>?
                 val reply: String?
                 if (hasConnectivity(context)) {
-                    reply = messageRepository.getChatbotReply(trimmedText)
+                    replyPair = messageRepository.getChatbotReply(trimmedText)
+                    reply = replyPair?.first
                 } else {
-                    reply = null
+                    replyPair = null
                 }
 
-                Log.d(TAG, reply.toString())
+                Log.d(TAG, replyPair.toString())
 
-                botResponse.messageContent = parseBotReply(context, reply) ?: context.getString(R.string.no_network)
+                botResponse.messageContent = parseBotReply(context, replyPair) ?: context.getString(R.string.no_network)
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name

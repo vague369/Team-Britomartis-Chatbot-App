@@ -29,7 +29,7 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
                 // There's a payload
                 payload = response.queryResult.getFulfillmentMessages(response.queryResult.fulfillmentMessagesCount - 1)
                     .payload
-                    .fieldsMap //.getValue("type").stringValue
+                    .fieldsMap
             }
 
             return Pair<String?, Map<String, Value>?>(response.queryResult.fulfillmentText, payload)

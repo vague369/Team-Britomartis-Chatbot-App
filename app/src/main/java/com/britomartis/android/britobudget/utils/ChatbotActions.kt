@@ -25,6 +25,18 @@ private fun doTextReplacement(context: Context, text: String, template: String):
     return text
 }
 
+
+private fun doValueSave(context: Context, key: String, value: String) {
+
+    when (key) {
+        "\$LOCAL_USERNAME" -> {
+            // Save the user's name
+            saveUsername(context, value)
+        }
+    }
+}
+
+
 fun parseBotReply(context: Context, replyPair: Pair<String?, Map<String, Value>?>?): String? {
     if (replyPair == null) return null
 
@@ -42,6 +54,15 @@ fun parseBotReply(context: Context, replyPair: Pair<String?, Map<String, Value>?
             // replyText should not be null
             if (replyText == null) return null
             replyText = doTextReplacement(context, replyText, template)
+        }
+        "SAVE" -> {
+            // Asking for a value to be saved locally
+            // Get the key and value
+            val key = payload.getValue("key").stringValue
+            val value = payload.getValue("value").stringValue
+
+            if (key == null || value == null) return replyText
+            doValueSave(context, key, value)
         }
     }
 

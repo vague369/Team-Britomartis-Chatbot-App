@@ -2,6 +2,7 @@ package com.britomartis.android.britobudget.data
 
 import android.util.Log
 import com.google.cloud.dialogflow.v2.*
+import com.google.protobuf.Value
 
 class MessageRepository private constructor(private val messageDao: MessageDao) {
 
@@ -13,7 +14,7 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
         this.sessionsClient = sessionsClient
     }
 
-    suspend fun getChatbotReply(query: String): String? {
+    suspend fun getChatbotReply(query: String): Pair<String?, Map<String, Value>?>? {
         try {
             val textInput = TextInput.newBuilder().setText(query).setLanguageCode("en-US").build()
             val queryInput = QueryInput.newBuilder().setText(textInput).build()
@@ -21,9 +22,17 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
                 .setSession(session.toString())
                 .setQueryInput(queryInput)
                 .build()
-
             val response = sessionsClient.detectIntent(detectIntentRequest)
-            return response.queryResult.fulfillmentText
+
+            var payload: Map<String, Value>? = null
+            if (response.queryResult.fulfillmentMessagesCount > 1) {
+                // There's a payload
+                payload = response.queryResult.getFulfillmentMessages(response.queryResult.fulfillmentMessagesCount - 1)
+                    .payload
+                    .fieldsMap //.getValue("type").stringValue
+            }
+
+            return Pair<String?, Map<String, Value>?>(response.queryResult.fulfillmentText, payload)
 
         } catch (e: Exception) {
             e.printStackTrace()

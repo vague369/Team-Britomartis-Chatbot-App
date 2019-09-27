@@ -2,7 +2,6 @@ package com.britomartis.android.britobudget
 
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,11 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
-            Log.d(TAG, "Changes Observed")
             chatAdapter.dataset = it
             chatAdapter.notifyDataSetChanged()
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
-            Log.d(TAG, "Observation done")
         })
 
         send_button.setOnClickListener {

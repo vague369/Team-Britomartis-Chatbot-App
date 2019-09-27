@@ -13,6 +13,7 @@ import com.britomartis.android.britobudget.data.Message
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.convertTimeLongToString
+import com.britomartis.android.britobudget.utils.isOver5Minutes
 
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
@@ -45,8 +46,14 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
 
         if (message.messageType == MESSAGE_TYPE_BOT) {
             if (TextUtils.isEmpty(message.messageContent)) {
-                // Start Lottie Animation
-                if (holder.lottieProgress != null) {
+                if (isOver5Minutes(message.messageTime)) {
+                    // Probably will not get a response EVER
+                    message.messageContent = context.getString(R.string.no_response_from_bot)
+                    holder.messageContent.text = message.messageContent
+                    holder.lottieProgress.visibility = View.GONE
+                }
+                // Else start Lottie Animation
+                else if (holder.lottieProgress != null) {
                     holder.lottieProgress.visibility = View.VISIBLE
                 }
             } else {

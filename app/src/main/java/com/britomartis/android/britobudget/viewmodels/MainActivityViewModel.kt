@@ -104,7 +104,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name
-                if (!userNameAlreadySaved(context)) {
+                if (hasConnectivity(context) && !userNameAlreadySaved(context)) {
                     // There is no username saved insert a username question
                     val userNameQuery = Message(
                         MESSAGE_TYPE_BOT,

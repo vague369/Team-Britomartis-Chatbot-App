@@ -28,7 +28,7 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
     }
 
     interface ScrolledFarEnough {
-        fun scrolledFarEnough()
+        fun scrolledFarEnough(hasScrolledFarEnough: Boolean)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -79,8 +79,9 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         }
 
         if (position < (dataset.size - 10)) {
-            Log.d(TAG, position.toString())
-            (context as ScrolledFarEnough).scrolledFarEnough()
+            (context as ScrolledFarEnough).scrolledFarEnough(true)
+        } else {
+            (context as ScrolledFarEnough).scrolledFarEnough(false)
         }
     }
 

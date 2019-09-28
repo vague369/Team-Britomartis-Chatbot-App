@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
         chat_recyclerview.adapter = chatAdapter
         chat_recyclerview.setHasFixedSize(true)
 
+        fab_quickdown.visibility = View.GONE
+
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
             chatAdapter.dataset = it
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
             val inputText = userinput_edittext.text?.toString()
             viewModel.sendButtonClicked(inputText)
             userinput_edittext.setText("")
+        }
+
+        // Jump to bottom
+        fab_quickdown.setOnClickListener {
+            chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
         }
 
         // Set the date, depending on the first visible item
@@ -66,8 +73,9 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
         })
     }
 
-    override fun scrolledFarEnough() {
-
+    override fun scrolledFarEnough(hasScrolledFarEnough: Boolean) {
+        if (hasScrolledFarEnough) fab_quickdown.visibility = View.VISIBLE
+        else fab_quickdown.visibility = View.GONE
     }
 
     companion object {

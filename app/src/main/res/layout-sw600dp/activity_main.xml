@@ -9,6 +9,18 @@
     android:background="@color/colorPrimary1"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_quickdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
@@ -92,6 +104,8 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:visibility="gone"
+        tools:text="SEPTEMBER 23, 2019"
         android:background="@drawable/round_rect_background"
         android:gravity="center"
         android:minWidth="100dp"
@@ -99,11 +113,9 @@
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         android:textColor="@color/colorAccent1"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chat_recyclerview"
-        tools:text="SEPTEMBER 23, 2019"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

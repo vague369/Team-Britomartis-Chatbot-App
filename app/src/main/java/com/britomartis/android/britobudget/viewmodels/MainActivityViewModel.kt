@@ -82,6 +82,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
         )
 
         // Coroutines bridge
+        // TODO: Messy code, FIX
         viewModelScope.launch {
             // Dispatchers.Main
             messageRepository.insertMessage(userMessage)
@@ -91,7 +92,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             withContext(Dispatchers.IO) {
                 // Dispatchers.IO
                 val replyPair: Pair<String?, Map<String, Value>?>?
-                var reply: String? = null
+                var reply: String?
                 if (hasConnectivity(context)) {
                     replyPair = messageRepository.getChatbotReply(trimmedText)
                     reply = replyPair?.first
@@ -102,10 +103,11 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
                 Log.d(TAG, replyPair.toString())
 
                 reply = parseBotReply(context, replyPair)
-                if (reply == null) botResponse.messageContent = context.getString(R.string.no_network)
-                else if (TextUtils.isEmpty(reply)) botResponse.messageContent =
-                    context.getString(R.string.no_response_from_bot)
-
+                botResponse.messageContent = when {
+                    reply == null -> context.getString(R.string.no_network)
+                    TextUtils.isEmpty(reply) -> context.getString(R.string.no_response_from_bot)
+                    else -> reply
+                }
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name

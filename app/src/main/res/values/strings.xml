@@ -10,4 +10,5 @@
     <string name="chatbot_defaultreply_what_is_your_name">Oh bummer! I don\'t seem to have your name. What do I call you?</string>
     <string name="chatbot_defaultreplacement_no_local_username">Guest</string>
     <string name="chatbot_defaultreply_first_hello">Hello there! My name is BritoBot, I am your personal daily &lt;b&gt;news&lt;/b&gt; curator for &lt;b&gt;HNG 6.0.&lt;/b&gt; It\'s nice to meet you.</string>
+    <string name="welcome">Stay updated with BritoBot; Your personal HNG6.0 news curator!</string>
 </resources>

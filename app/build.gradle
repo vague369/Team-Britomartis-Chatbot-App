@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -9,17 +11,30 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.britomartis.android.britobudget"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
     }
 }
 
@@ -31,6 +46,25 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintlayout}"
     implementation "com.google.android.material:material:${rootProject.material}"
+
+    //JavaV2
+    implementation "com.google.cloud:google-cloud-dialogflow:0.67.0-alpha"
+
+    implementation "io.grpc:grpc-okhttp:1.15.1"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:${rootProject.lottie}"
+
+    //Lifecycle & ViewModel
+    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycle}"
+    implementation "androidx.fragment:fragment-ktx:${rootProject.corektx}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${rootProject.lifecycle}"
+
+    //Room
+    implementation "androidx.room:room-runtime:${rootProject.room}"
+    kapt "androidx.room:room-compiler:${rootProject.room}"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:${rootProject.room}"
 
     // TESTS
     testImplementation "com.google.truth:truth:${rootProject.truth}"

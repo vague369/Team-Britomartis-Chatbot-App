@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "britobudget-eiyfbe",
+  "private_key_id": "38f24d45f456fa182c4c8cab914f432c328f8018",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDsEcd3uUqUIxPk\nVMQMiZNr96KT7eIQJdYWyEc9tCpwSBSv6oqinRboM2bjhU0smCYW7zVuc7su44AV\nQSIxVqrwIdxEx5QrO9qwTMc5gceFJrEcQwummJ19oq3Q83NsC1PUgZpaXWDhW7Hl\nnh+Es1KQjRBX9Ww179yAJo5+EWw4Muk2LteVd95Aa2o30JD5vvQJZBRbRS69RxzE\ndkKJ/nwb8rd3YdNCULn2NRn3v7kgsuIho8vkveCZWeUnHxiwv1S+nu1t97lBusMt\nOxVZ7pqvuQO9weOYRL/RGMBTHPmilCehnpXfAu+Ha8SNpJWT84GMPm+IHhSOtEDQ\nCXBhZlONAgMBAAECggEAC2uexT17DKiXxUOOina7YY1E2bg36AUUktyUibkmFnF+\nQrZrh4tm+MvHzfj8b0xbB2ACKzpBE3chEqYog8+IDH7u24r2MZM/NKk6OB99qgTh\nq5bYwPIAKHxOwV2Nt2vi3dR5Rabf0Xcwp4WbS72rIGAaqs6uMfvNJIv498NbA2rn\nUTPaTSly+ZZYB8HITNBpb9474vrvIhXnpksPVJmv/v4GSZpP9akM+m9zQXKG10Yb\nO4UrJ0qsqzM5BZlNPxjW+TBwkSEvcf8FC+GglplMbVLq00DR04TguckHf/pcKF38\nQdpL0Rvu4N/afugX78Gio6FgYyvpSmmeli/4+I3U1wKBgQD2Awota/MfR+natmNp\nD56dV/iSt2+o3GpFYylFply8iudUL4ujU/5Q49Idy8VT8SEgtovVHtI8wHUziVhE\ngLpXLbYkHUoyBEzujOeShLYHIWMwtxSR9oT8eCrbpQJXk7Rc5Bcdv2Cn7pmVWMlH\naYW9INU0gE3zX5vOKtJv50HZCwKBgQD1p2bA7lAMmn5xQjf7LKR/NECcTwbO6Ply\nO1V/E5ewFuq+l5qiGw2vkBIvVOSH11xDCw5huOTmrF8f7XH6oUv/3WvvVxOfnC9z\nvbQAxp2LjWtUpbtSVMiBCwfetFUpaF4ll0CFiOeE22qZkPA7FPHp8bpgkqD6XDLP\nmQSGG11UxwKBgHaqKLKYK4GfMpIo//KhciT7Vg+PI/ETwL8Pgczy3jCj38mf1X9G\n+JkUCzoMHHbNDOm2o+R9JXPgcagWS9lfLoL2rbDl3/AYWvOGS/1EvnjaBfptlSKD\nAsq1PBcOlP6hZJKaAvx6X6khUjvTw+MKZ1Q/Dhhw+yi1qXXc+fy4U+7ZAoGBAMOI\n+mt7xlAh8Z+pe/H8uPtf1kYVSXANVfEtdYJvUACkXTpUZou+SQiD/1WZl0bhj9j1\nxf7XM6zBa/53/I/pMBt8XlvmzgHwSn0wdUVg0yqv6M06Fn8UaXz+EMeed2M8ZiQ5\n3uvr641/Mb0G95GvvFfhR99zF5vxI6jHPiiZQ5MlAoGBANaAWHeGfD39UbBkhlk4\nFgLSXc+kip4pEUP8sMOPzQRDakycY07qknHUxjcXwobbfUuchWwBW4YVBlcVwUfJ\nWrY+pOsQmv9lpxHIOJeBtld11FRTL5Jc3X7S479dNWubqRZjdx7KfHp/3YmnG/IN\nzKCPa16m1D9cZ9hpA21ivW3N\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-knpuue@britobudget-eiyfbe.iam.gserviceaccount.com",
+  "client_id": "110196331194842265761",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-knpuue%40britobudget-eiyfbe.iam.gserviceaccount.com"
+}

@@ -22,12 +22,10 @@ class StartActivity : AppCompatActivity() {
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
 
         val headertitle = findViewById<TextView>(R.id.tite)
-        val headerimage = findViewById<ImageView>(R.id.exit)
         val sideimage = findViewById<ImageView>(R.id.slide)
 
         //set the animation
 
-        headerimage.startAnimation(ttp)
         headertitle.startAnimation(ttp)
         sideimage.startAnimation(ttb)
 
@@ -48,8 +46,6 @@ class StartActivity : AppCompatActivity() {
             }
 
         }
-
-        exit.setOnClickListener { System.exit(-1) }
 
         chat.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

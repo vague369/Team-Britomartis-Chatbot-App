@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
         chat_recyclerview.adapter = chatAdapter
         chat_recyclerview.setHasFixedSize(true)
 
-        fab_quickdown.visibility = View.GONE
-
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
             if (it == null || it.isEmpty()) viewModel.sayFirstHello()

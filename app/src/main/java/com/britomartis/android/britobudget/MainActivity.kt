@@ -14,7 +14,7 @@ import com.britomartis.android.britobudget.utils.convertTimeLongToDateString
 import com.britomartis.android.britobudget.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
 
     private val viewModel: MainActivityViewModel by viewModels {
         Injector.provideMainActivityViewModelFactory(this)
@@ -29,9 +29,13 @@ class MainActivity : AppCompatActivity() {
         chatAdapter = ChatAdapter(this, listOf())
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
+        chat_recyclerview.setHasFixedSize(true)
+
+        fab_quickdown.visibility = View.GONE
 
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
+            if (it == null || it.isEmpty()) viewModel.sayFirstHello()
             chatAdapter.dataset = it
             chatAdapter.notifyDataSetChanged()
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
@@ -43,11 +47,16 @@ class MainActivity : AppCompatActivity() {
             userinput_edittext.setText("")
         }
 
+        // Jump to bottom
+        fab_quickdown.setOnClickListener {
+            chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)
+        }
+
         // Set the date, depending on the first visible item
         chat_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-
+                //Log.d(TAG, "")
                 var p =
                     (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 if (p == -1)
@@ -65,7 +74,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun scrolledFarEnough(hasScrolledFarEnough: Boolean) {
+        if (hasScrolledFarEnough) fab_quickdown.visibility = View.VISIBLE
+        else fab_quickdown.visibility = View.GONE
+    }
+
     companion object {
-        val TAG = "MainActivityViewModel"
+        val TAG = "MainActivity"
     }
 }

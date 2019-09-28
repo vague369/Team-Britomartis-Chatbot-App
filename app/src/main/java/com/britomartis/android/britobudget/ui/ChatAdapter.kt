@@ -1,7 +1,10 @@
 package com.britomartis.android.britobudget.ui
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +18,21 @@ import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.convertTimeLongToString
 import com.britomartis.android.britobudget.utils.isOver5Minutes
 
+
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+
+    init {
+        try {
+            (context as ScrolledFarEnough)
+        } catch (e: ClassCastException) {
+            Log.e(TAG, "Context must implement ScrolledFarEnough")
+            throw ClassCastException(e.message)
+        }
+    }
+
+    interface ScrolledFarEnough {
+        fun scrolledFarEnough(hasScrolledFarEnough: Boolean)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = when (viewType) {
@@ -58,10 +75,22 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
                 }
             } else {
                 // We have a reply
-                holder.messageContent.text = message.messageContent
+                if (Build.VERSION.SDK_INT < 24) {
+                    //use for backwards compatibility with API levels below 24
+                    holder.messageContent.text = Html.fromHtml(message.messageContent)
+                } else {
+                    holder.messageContent.text = Html.fromHtml(message.messageContent, Html.FROM_HTML_MODE_COMPACT)
+                }
                 holder.lottieProgress.visibility = View.GONE
+
                 return
             }
+        }
+
+        if (position < (dataset.size - 15)) {
+            (context as ScrolledFarEnough).scrolledFarEnough(true)
+        } else {
+            (context as ScrolledFarEnough).scrolledFarEnough(false)
         }
     }
 
@@ -69,5 +98,9 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
         val messageContent = view.findViewById<TextView>(R.id.messageContent)
         val messageTime = view.findViewById<TextView>(R.id.messageTime)
         val lottieProgress = view.findViewById<LottieAnimationView>(R.id.lottie_progress)
+    }
+
+    companion object {
+        const val TAG = "MainActivityChatAdapter"
     }
 }

@@ -41,6 +41,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:autoLink="all"
             android:gravity="start"
             android:maxWidth="250dp"
             android:padding="8dp"

@@ -47,17 +47,18 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             e.printStackTrace()
         }
 
-        if (messageLiveList.value == null) {
-            // There's no message history. Say Hi
-            val botResponse = Message(
-                MESSAGE_TYPE_BOT,
-                getCurrentTimeAsLong(),
-                context.getString(R.string.chatbot_defaultreply_first_hello)
-            )
+    }
 
-            viewModelScope.launch {
-                messageRepository.insertMessage(botResponse)
-            }
+    fun sayFirstHello() {
+        // There's no message history. Say Hi
+        val botResponse = Message(
+            MESSAGE_TYPE_BOT,
+            getCurrentTimeAsLong(),
+            context.getString(R.string.chatbot_defaultreply_first_hello)
+        )
+
+        viewModelScope.launch {
+            messageRepository.insertMessage(botResponse)
         }
     }
 
@@ -81,6 +82,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
         )
 
         // Coroutines bridge
+        // TODO: Messy code, FIX
         viewModelScope.launch {
             // Dispatchers.Main
             messageRepository.insertMessage(userMessage)
@@ -90,7 +92,7 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             withContext(Dispatchers.IO) {
                 // Dispatchers.IO
                 val replyPair: Pair<String?, Map<String, Value>?>?
-                val reply: String?
+                var reply: String?
                 if (hasConnectivity(context)) {
                     replyPair = messageRepository.getChatbotReply(trimmedText)
                     reply = replyPair?.first
@@ -100,11 +102,16 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
 
                 Log.d(TAG, replyPair.toString())
 
-                botResponse.messageContent = parseBotReply(context, replyPair) ?: context.getString(R.string.no_network)
+                reply = parseBotReply(context, replyPair)
+                botResponse.messageContent = when {
+                    reply == null -> context.getString(R.string.no_network)
+                    TextUtils.isEmpty(reply) -> context.getString(R.string.no_response_from_bot)
+                    else -> reply
+                }
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name
-                if (hasConnectivity(context) && !userNameAlreadySaved(context)) {
+                if ((reply != null) && !userNameAlreadySaved(context)) {
                     // There is no username saved insert a username question
                     val userNameQuery = Message(
                         MESSAGE_TYPE_BOT,

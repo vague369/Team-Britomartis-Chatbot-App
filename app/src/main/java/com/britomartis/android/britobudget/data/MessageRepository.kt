@@ -26,13 +26,24 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
 
             var payload: Map<String, Value>? = null
             if (response.queryResult.fulfillmentMessagesCount > 1) {
-                // There's a payload
-                payload = response.queryResult.getFulfillmentMessages(response.queryResult.fulfillmentMessagesCount - 1)
-                    .payload
-                    .fieldsMap
+                // Get the first payload
+                val listOfPayloads = response.queryResult.fulfillmentMessagesList.filter { it.hasPayload() }
+                if (listOfPayloads.isNotEmpty()) {
+                    payload = listOfPayloads[0]
+                        .payload
+                        .fieldsMap
+                }
             }
 
-            return Pair<String?, Map<String, Value>?>(response.queryResult.fulfillmentText, payload)
+            // Merge fulfillment text responses
+            val stringBuilder = StringBuilder("")
+            val listOfTextResponses = response.queryResult.fulfillmentMessagesList.filter { it.hasText() }
+            listOfTextResponses.forEachIndexed { index, textResponse ->
+                if (textResponse.hasText()) stringBuilder.append(textResponse.text.getText(0).toString())
+                if (index < listOfTextResponses.size - 1) stringBuilder.append("<br /><br />")
+            }
+
+            return Pair<String?, Map<String, Value>?>(stringBuilder.toString(), payload)
 
         } catch (e: Exception) {
             e.printStackTrace()

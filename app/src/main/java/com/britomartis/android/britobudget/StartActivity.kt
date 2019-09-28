@@ -65,7 +65,7 @@ class StartActivity : AppCompatActivity() {
 
     }
 
-    fun getMainActivityIntent(): Intent {
+    private fun getMainActivityIntent(): Intent {
         return Intent(this, MainActivity::class.java)
     }
 

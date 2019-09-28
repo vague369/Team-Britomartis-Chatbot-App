@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
         } catch (ex: android.content.ActivityNotFoundException) {
             Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     override fun scrolledFarEnough(hasScrolledFarEnough: Boolean) {

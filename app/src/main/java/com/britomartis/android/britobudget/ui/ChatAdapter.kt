@@ -1,6 +1,8 @@
 package com.britomartis.android.britobudget.ui
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_BOT
 import com.britomartis.android.britobudget.utils.MESSAGE_TYPE_USER
 import com.britomartis.android.britobudget.utils.convertTimeLongToString
 import com.britomartis.android.britobudget.utils.isOver5Minutes
+
 
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
@@ -72,8 +75,14 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
                 }
             } else {
                 // We have a reply
-                holder.messageContent.text = message.messageContent
+                if (Build.VERSION.SDK_INT < 24) {
+                    //use for backwards compatibility with API levels below 24
+                    holder.messageContent.text = Html.fromHtml(message.messageContent)
+                } else {
+                    holder.messageContent.text = Html.fromHtml(message.messageContent, Html.FROM_HTML_MODE_COMPACT)
+                }
                 holder.lottieProgress.visibility = View.GONE
+
                 return
             }
         }

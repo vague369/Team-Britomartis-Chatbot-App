@@ -1,11 +1,8 @@
 package com.britomartis.android.britobudget
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.activity.viewModels
@@ -87,38 +84,14 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
                         Log.d(TAG, "ABOUT")
                         true
                     }
-                    R.id.action_exit -> {
-                        // Go back to start
-                        with(getPreferences(Context.MODE_PRIVATE).edit()) {
-                            putBoolean(getString(R.string.user_logged_in), false)
-                            commit()
-                        }
-                        startActivity(getStartActivityIntent())
-                        finish()
+                    R.id.action_feedback -> {
+                        Log.d(TAG, "FEEDBACK")
                         true
                     }
                     else -> false
                 }
             }
             popup.show()
-        }
-    }
-
-    private fun getStartActivityIntent(): Intent? {
-        return Intent(this, StartActivity::class.java)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_about -> {
-                Log.d(TAG, "ABOUT")
-                true
-            }
-            R.id.action_exit -> {
-                Log.d(TAG, "BACK TO START")
-                true
-            }
-            else -> false
         }
     }
 

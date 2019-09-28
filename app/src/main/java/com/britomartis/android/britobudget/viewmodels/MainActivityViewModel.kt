@@ -101,7 +101,11 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
 
                 Log.d(TAG, replyPair.toString())
 
-                botResponse.messageContent = parseBotReply(context, replyPair) ?: context.getString(R.string.no_network)
+                reply = parseBotReply(context, replyPair)
+                if (reply == null) botResponse.messageContent = context.getString(R.string.no_network)
+                else if (TextUtils.isEmpty(reply)) botResponse.messageContent =
+                    context.getString(R.string.no_response_from_bot)
+
                 botResponse.messageTime = getCurrentTimeAsLong()
 
                 // Check if the user has a saved name

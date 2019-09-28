@@ -1,5 +1,7 @@
 package com.britomartis.android.britobudget
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -86,7 +88,13 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
                         true
                     }
                     R.id.action_exit -> {
-                        Log.d(TAG, "BACK TO START")
+                        // Go back to start
+                        with(getPreferences(Context.MODE_PRIVATE).edit()) {
+                            putBoolean(getString(R.string.user_logged_in), false)
+                            commit()
+                        }
+                        startActivity(getStartActivityIntent())
+                        finish()
                         true
                     }
                     else -> false
@@ -94,6 +102,10 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
             }
             popup.show()
         }
+    }
+
+    private fun getStartActivityIntent(): Intent? {
+        return Intent(this, StartActivity::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

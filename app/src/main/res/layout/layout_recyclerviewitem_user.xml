@@ -29,6 +29,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="start"
+            android:autoLink="all"
             android:maxWidth="250dp"
             android:padding="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"

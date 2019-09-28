@@ -34,8 +34,9 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
 
             // Merge fulfillment text responses
             val stringBuilder = StringBuilder("")
-            for (textResponse in response.queryResult.fulfillmentMessagesList) {
-                if (textResponse.hasText()) stringBuilder.appendln(textResponse.text.getText(0).toString())
+            response.queryResult.fulfillmentMessagesList.forEachIndexed { index, textResponse ->
+                if (textResponse.hasText()) stringBuilder.append(textResponse.text.getText(0).toString())
+                if (index < response.queryResult.fulfillmentMessagesCount) stringBuilder.append("<br />")
             }
 
             return Pair<String?, Map<String, Value>?>(stringBuilder.toString(), payload)

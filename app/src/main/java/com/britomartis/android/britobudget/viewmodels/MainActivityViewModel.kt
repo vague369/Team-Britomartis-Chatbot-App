@@ -47,17 +47,18 @@ class MainActivityViewModel(val context: Context, private val messageRepository:
             e.printStackTrace()
         }
 
-        if (messageLiveList.value == null) {
-            // There's no message history. Say Hi
-            val botResponse = Message(
-                MESSAGE_TYPE_BOT,
-                getCurrentTimeAsLong(),
-                context.getString(R.string.chatbot_defaultreply_first_hello)
-            )
+    }
 
-            viewModelScope.launch {
-                messageRepository.insertMessage(botResponse)
-            }
+    fun sayFirstHello() {
+        // There's no message history. Say Hi
+        val botResponse = Message(
+            MESSAGE_TYPE_BOT,
+            getCurrentTimeAsLong(),
+            context.getString(R.string.chatbot_defaultreply_first_hello)
+        )
+
+        viewModelScope.launch {
+            messageRepository.insertMessage(botResponse)
         }
     }
 

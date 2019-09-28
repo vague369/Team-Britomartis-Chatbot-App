@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
 
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
+            if (it == null || it.isEmpty()) viewModel.sayFirstHello()
             chatAdapter.dataset = it
             chatAdapter.notifyDataSetChanged()
             chat_recyclerview.scrollToPosition(chatAdapter.dataset.size - 1)

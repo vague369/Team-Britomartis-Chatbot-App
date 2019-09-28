@@ -14,7 +14,7 @@ import com.britomartis.android.britobudget.utils.convertTimeLongToDateString
 import com.britomartis.android.britobudget.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ChatAdapter.ScrolledFarEnough {
 
     private val viewModel: MainActivityViewModel by viewModels {
         Injector.provideMainActivityViewModelFactory(this)
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         chatAdapter = ChatAdapter(this, listOf())
         chat_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         chat_recyclerview.adapter = chatAdapter
+        chat_recyclerview.setHasFixedSize(true)
 
         // Observe the list of messages
         viewModel.messageLiveList.observe(this, Observer {
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         chat_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-
+                //Log.d(TAG, "")
                 var p =
                     (chat_recyclerview.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 if (p == -1)
@@ -65,7 +66,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun scrolledFarEnough() {
+
+    }
+
     companion object {
-        val TAG = "MainActivityViewModel"
+        val TAG = "MainActivity"
     }
 }

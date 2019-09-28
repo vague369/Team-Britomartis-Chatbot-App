@@ -2,6 +2,7 @@ package com.britomartis.android.britobudget.ui
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,19 @@ import com.britomartis.android.britobudget.utils.convertTimeLongToString
 import com.britomartis.android.britobudget.utils.isOver5Minutes
 
 class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+
+    init {
+        try {
+            (context as ScrolledFarEnough)
+        } catch (e: ClassCastException) {
+            Log.e(TAG, "Context must implement ScrolledFarEnough")
+            throw ClassCastException(e.message)
+        }
+    }
+
+    interface ScrolledFarEnough {
+        fun scrolledFarEnough()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = when (viewType) {
@@ -63,11 +77,20 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
                 return
             }
         }
+
+        if (position < (dataset.size - 10)) {
+            Log.d(TAG, position.toString())
+            (context as ScrolledFarEnough).scrolledFarEnough()
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val messageContent = view.findViewById<TextView>(R.id.messageContent)
         val messageTime = view.findViewById<TextView>(R.id.messageTime)
         val lottieProgress = view.findViewById<LottieAnimationView>(R.id.lottie_progress)
+    }
+
+    companion object {
+        const val TAG = "MainActivityChatAdapter"
     }
 }

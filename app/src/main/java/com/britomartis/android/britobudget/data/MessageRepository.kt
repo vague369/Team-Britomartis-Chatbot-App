@@ -32,7 +32,13 @@ class MessageRepository private constructor(private val messageDao: MessageDao) 
                     .fieldsMap
             }
 
-            return Pair<String?, Map<String, Value>?>(response.queryResult.fulfillmentText, payload)
+            // Merge fulfillment text responses
+            val stringBuilder = StringBuilder("")
+            for (textResponse in response.queryResult.fulfillmentMessagesList) {
+                if (textResponse.hasText()) stringBuilder.appendln(textResponse.text.getText(0).toString())
+            }
+
+            return Pair<String?, Map<String, Value>?>(stringBuilder.toString(), payload)
 
         } catch (e: Exception) {
             e.printStackTrace()

@@ -78,7 +78,7 @@ class ChatAdapter(val context: Context, var dataset: List<Message>) : RecyclerVi
             }
         }
 
-        if (position < (dataset.size - 10)) {
+        if (position < (dataset.size - 15)) {
             (context as ScrolledFarEnough).scrolledFarEnough(true)
         } else {
             (context as ScrolledFarEnough).scrolledFarEnough(false)

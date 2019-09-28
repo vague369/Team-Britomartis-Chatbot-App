@@ -30,7 +30,7 @@ class StartActivity : AppCompatActivity() {
         sideimage.startAnimation(ttb)
 
 
-        btn_email.setOnClickListener {
+        feedbackcard.setOnClickListener {
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 data = Uri.parse("mailto:")
@@ -47,7 +47,7 @@ class StartActivity : AppCompatActivity() {
 
         }
 
-        chat.setOnClickListener {
+        chatbotcard.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

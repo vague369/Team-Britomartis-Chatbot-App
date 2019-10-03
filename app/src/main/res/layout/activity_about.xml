@@ -64,7 +64,6 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
             android:background="@drawable/blue_round_background"
             android:gravity="center"
             android:padding="8dp"

@@ -7,12 +7,12 @@
     android:background="@drawable/two_way_color"
     tools:context=".AboutActivity">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/chat_icon"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
+        android:tint="@android:color/white"
         android:src="@drawable/chatbot_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +23,9 @@
         android:id="@+id/about_page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/britomartis"
+        android:text="@string/app_name"
         android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         app:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="@+id/chat_icon"
         app:layout_constraintStart_toStartOf="@+id/chat_icon"
@@ -37,48 +36,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Chatbot"
+        android:text="@string/britomartis"
         android:textColor="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintEnd_toEndOf="@+id/about_page_title"
         app:layout_constraintStart_toStartOf="@+id/about_page_title"
         app:layout_constraintTop_toBottomOf="@+id/about_page_title" />
 
     <LinearLayout
         android:id="@+id/layout_vertical_container"
-        android:layout_width="407dp"
-        android:layout_height="395dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/white_background"
         android:orientation="vertical"
         android:textColor="@android:color/black"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_subtitle">
 
-        <Button
-            android:layout_width="361dp"
+        <TextView
             android:id="@+id/btn_about"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
+            android:background="@drawable/blue_round_background"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="@string/about"
             android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:background="@drawable/white_background"
-            android:backgroundTint="#0277BD"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
-             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:textSize="18sp"
-            android:lineSpacingExtra="12dp"
-            android:textColor="#494545"
-            android:text="Britomartis Chatbot is an android chatbot which has been to design to interact with the user,it is user friendly and will be there to assist the user to get familiar with the chatbot app\n\n Consider using your name to personalize this application as your own app for smooth interaction. "
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp" />
+            android:padding="16dp"
+            android:lineSpacingExtra="12dp"
+            android:text="@string/about_text"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
